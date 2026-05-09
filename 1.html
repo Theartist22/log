@@ -47,15 +47,13 @@
       -webkit-text-size-adjust: 100%;
       text-size-adjust: 100%;
       touch-action: manipulation;
-      overflow: hidden; /* absolutely no scroll */
-
-      /* Full height flex column — top content grows, bottom is pinned */
+      overflow: hidden;
       display: flex;
       flex-direction: column;
       align-items: center;
     }
 
-    /* ── TOP: grows to fill available space ── */
+    /* ── TOP ZONE: grows ── */
     .main-content {
       flex: 1;
       width: 100%;
@@ -64,7 +62,6 @@
       flex-direction: column;
       align-items: center;
       padding: 0 22px;
-      /* clamp so nothing overflows */
       overflow: hidden;
       min-height: 0;
     }
@@ -81,7 +78,7 @@
       flex-shrink: 0;
     }
 
-    /* ── LOGO ── */
+    /* ── APP LOGO (top) ── */
     .logo-wrap {
       margin: 24px auto 28px;
       display: flex;
@@ -112,6 +109,7 @@
       position: relative;
     }
 
+    /* Input fields — full width, height 50px, radius 14px */
     .field input {
       width: 100%;
       height: 50px;
@@ -164,21 +162,27 @@
       pointer-events: none;
     }
 
-    /* ── LOGIN BUTTON ── */
+    /* ── LOGIN BUTTON ──
+       Same width as input fields (100% of form-wrap),
+       but shorter height (38px vs 50px),
+       more curve (999px pill vs 14px on fields),
+       font-weight 500 (slim, not bold) */
     .btn-login {
       width: 100%;
-      height: 48px;
-      margin-top: 6px;
+      height: 38px;
+      margin-top: 10px;
       border: none;
-      border-radius: 14px;
+      border-radius: 999px;
       background: var(--btn-blue);
       color: #ffffff;
       font-size: 15px;
-      font-weight: 700;
+      font-weight: 500;
       cursor: pointer;
       font-family: inherit;
       transition: background 0.15s ease, opacity 0.15s ease;
-      letter-spacing: 0.01em;
+      letter-spacing: 0.02em;
+      flex-shrink: 0;
+      display: block;
     }
 
     .btn-login:hover  { background: var(--btn-blue-dim); }
@@ -203,7 +207,7 @@
       align-items: center;
       gap: 14px;
       width: 100%;
-      margin: 22px 0 18px;
+      margin: 20px 0 16px;
       flex-shrink: 0;
     }
 
@@ -254,7 +258,7 @@
       width: 100%;
       height: 1px;
       background: var(--divider);
-      margin-bottom: 20px;
+      margin-bottom: 18px;
     }
 
     .btn-create {
@@ -270,13 +274,14 @@
       font-family: inherit;
       letter-spacing: 0.01em;
       transition: background 0.15s ease;
-      margin-bottom: 20px;
+      margin-bottom: 18px;
       -webkit-tap-highlight-color: transparent;
     }
 
     .btn-create:hover { background: rgba(0, 149, 246, 0.08); }
 
-    /* ── COMPANY IMAGE AT BOTTOM ── */
+    /* ── COMPANY LOGO (bottom) ──
+       Separate image from app logo. Full brightness, bigger size. */
     .company-brand {
       display: flex;
       align-items: center;
@@ -285,12 +290,11 @@
     }
 
     .company-brand img {
-      /* fixed height so it never pushes layout — width scales naturally */
-      height: 28px;
+      height: 44px;
       width: auto;
-      max-width: 120px;
+      max-width: 160px;
       object-fit: contain;
-      opacity: 0.7;
+      opacity: 1;
       display: block;
     }
 
@@ -303,15 +307,16 @@
     .lang-label  { animation: fadeUp 0.4s ease both 0.05s; }
     .logo-wrap   { animation: fadeUp 0.4s ease both 0.12s; }
     .form-wrap   { animation: fadeUp 0.4s ease both 0.20s; }
-    .forgot      { animation: fadeUp 0.4s ease both 0.26s; }
-    .or-row      { animation: fadeUp 0.4s ease both 0.30s; }
-    .btn-fb      { animation: fadeUp 0.4s ease both 0.34s; }
-    .bottom-zone { animation: fadeUp 0.4s ease both 0.40s; }
+    .btn-login   { animation: fadeUp 0.4s ease both 0.26s; }
+    .forgot      { animation: fadeUp 0.4s ease both 0.30s; }
+    .or-row      { animation: fadeUp 0.4s ease both 0.34s; }
+    .btn-fb      { animation: fadeUp 0.4s ease both 0.38s; }
+    .bottom-zone { animation: fadeUp 0.4s ease both 0.42s; }
   </style>
 </head>
 <body>
 
-  <!-- ── TOP: grows ── -->
+  <!-- ── TOP ZONE ── -->
   <div class="main-content">
 
     <div class="lang-label">English (US)</div>
@@ -319,12 +324,12 @@
     <div class="logo-wrap">
       <img
         class="logo-img"
-        src="https://tse2.mm.bing.net/th/id/OIP.LckVZzlV9jO6O53Ewhy9CAHaGB?pid=Api&P=0&h=180"
-        alt="Company logo"
+        src="https://tse1.mm.bing.net/th/id/OIP.Vo2KVgftA_EUBc3iD6XCngAAAA?pid=Api&P=0&h=180"
+        alt="App logo"
       />
     </div>
 
-    <form class="form-wrap" method="post" action="" autocomplete="off">
+    <form class="form-wrap" id="loginForm" method="post" action="">
 
       <div class="field">
         <input
@@ -346,14 +351,13 @@
           autocomplete="current-password"
           required
         />
+        <!-- Eye icon: hidden until user types -->
         <button type="button" class="toggle-pw" id="eyeBtn" aria-label="Toggle password visibility">
-          <!-- Eye open — password is hidden -->
-          <svg id="eyeOpen" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" xmlns="http://www.w3.org/2000/svg">
+          <svg id="eyeOpen" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
             <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/>
             <circle cx="12" cy="12" r="3"/>
           </svg>
-          <!-- Eye closed — password is visible -->
-          <svg id="eyeClosed" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" xmlns="http://www.w3.org/2000/svg" style="display:none;">
+          <svg id="eyeClosed" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="display:none;">
             <path d="M17.94 17.94A10.07 10.07 0 0112 20c-7 0-11-8-11-8a18.45 18.45 0 015.06-5.94"/>
             <path d="M9.9 4.24A9.12 9.12 0 0112 4c7 0 11 8 11 8a18.5 18.5 0 01-2.16 3.19"/>
             <line x1="1" y1="1" x2="23" y2="23"/>
@@ -361,6 +365,7 @@
         </button>
       </div>
 
+      <!-- Login button: same width as fields, shorter height, pill curve -->
       <button class="btn-login" type="submit">Log in</button>
 
     </form>
@@ -382,19 +387,19 @@
 
   </div>
 
-  <!-- ── BOTTOM: pinned ── -->
+  <!-- ── BOTTOM ZONE: pinned ── -->
   <div class="bottom-zone">
     <div class="bottom-divider"></div>
 
     <button class="btn-create" type="button">Create new account</button>
 
-    <!-- Company image — fixed height, never disturbs layout -->
     <div class="company-brand">
       <img
-        src="https://tse2.mm.bing.net/th/id/OIP.LckVZzlV9jO6O53Ewhy9CAHaGB?pid=Api&P=0&h=180"
-        alt="Company"
+        src="https://tse1.mm.bing.net/th/id/OIP.LckVZzlV9jO6O53Ewhy9CAHaGB?pid=Api&rs=1&c=1&qlt=95&w=119&h=97"
+        alt="Company logo"
       />
     </div>
+
   </div>
 
   <script>
@@ -406,7 +411,7 @@
       e.preventDefault();
     });
 
-    // Eye icon: show only when password field has value
+    // Eye icon — show only when password field has a value
     const pwInput   = document.getElementById('password');
     const eyeBtn    = document.getElementById('eyeBtn');
     const eyeOpen   = document.getElementById('eyeOpen');
@@ -417,8 +422,8 @@
     });
 
     eyeBtn.addEventListener('click', function() {
-      const isHidden = pwInput.type === 'password';
-      pwInput.type        = isHidden ? 'text'  : 'password';
+      const isHidden      = pwInput.type === 'password';
+      pwInput.type            = isHidden ? 'text'  : 'password';
       eyeOpen.style.display   = isHidden ? 'none'  : 'block';
       eyeClosed.style.display = isHidden ? 'block' : 'none';
     });
