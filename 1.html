@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Instagram</title>
+  <title>Gowthamsite</title>
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -397,7 +397,7 @@
     flex: 0 0 auto;
   }
 
-  .Meta-block {
+  .Hangout-block {
     text-align: center;
     margin-top: 18px;
   }
@@ -479,45 +479,41 @@
     .mobile-wrap {
       display: flex;
       flex-direction: column;
-      justify-content: space-between;
       height: 100vh;
       height: 100dvh;
-      min-height: 100vh;
-      min-height: 100dvh;
       background: #000000;
       overflow: hidden;
+      position: relative;
     }
 
-    .mobile-top-lang {
-      padding-top: 34px;
-      text-align: center;
-      color: var(--lang-text);
-      font-size: 12px;
-      font-weight: 500;
-      line-height: 1;
-      background: transparent;
-      margin-bottom: 34px;
-      flex: 0 0 auto;
-    }
-
-    .mobile-screen {
+    /* TOP SECTION: lang + logo + form + forgot */
+    .mobile-top {
       flex: 1;
       display: flex;
       flex-direction: column;
       align-items: center;
-      justify-content: flex-start;
-      padding: 0px 24px 26px;
-      background: transparent;
+      padding: 0 24px;
       overflow: hidden;
     }
 
+    .mobile-top-lang {
+      padding-top: 28px;
+      padding-bottom: 0;
+      text-align: center;
+      color: var(--lang-text);
+      font-size: 13px;
+      font-weight: 500;
+      flex: 0 0 auto;
+      width: 100%;
+    }
+
     .mobile-logo-img {
-      width: 100px;
-      height: 100px;
-      margin: 12px 0 78px;
+      width: 120px;
+      height: 120px;
+      margin: 32px 0 48px;
       display: block;
       object-fit: contain;
-      border-radius: 40px;
+      border-radius: 32px;
       flex: 0 0 auto;
     }
 
@@ -529,18 +525,18 @@
 
     .mobile-field {
       width: 100%;
-      margin-bottom: 22px;
+      margin-bottom: 14px;
     }
 
     .mobile-field input {
       width: 100%;
-      height: 62px;
-      background: var(--mobile-field-bg);
-      border: 2px solid var(--mobile-field-border);
-      border-radius: 18px;
+      height: 58px;
+      background: transparent;
+      border: 1.5px solid rgba(86, 111, 137, 0.72);
+      border-radius: 14px;
       color: var(--mobile-field-text);
-      padding: 0 20px;
-      font-size: 18px;
+      padding: 0 18px;
+      font-size: 17px;
       outline: none;
     }
 
@@ -548,16 +544,20 @@
       color: var(--mobile-placeholder);
     }
 
+    .mobile-field input:focus {
+      border-color: var(--mobile-outline);
+    }
+
     .mobile-btn {
       width: 100%;
-      height: 60px;
+      height: 56px;
       border: none;
       border-radius: 999px;
       background: var(--mobile-btn-bg);
       color: var(--mobile-btn-text);
-      font-size: 18px;
-      font-weight: 500;
-      margin-top: 4px;
+      font-size: 17px;
+      font-weight: 600;
+      margin-top: 8px;
       cursor: pointer;
       flex: 0 0 auto;
     }
@@ -566,136 +566,75 @@
       display: block;
       text-align: center;
       color: var(--text);
-      font-size: 17px;
+      font-size: 16px;
       font-weight: 400;
-      line-height: 1.2;
-      margin: 26px 0 110px;
+      margin-top: 22px;
       flex: 0 0 auto;
+    }
+
+    /* BOTTOM SECTION: spacer + create + meta */
+    .mobile-bottom {
+      flex: 0 0 auto;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 0 24px 28px;
+      width: 100%;
     }
 
     .mobile-create {
       width: 100%;
       max-width: 420px;
-      height: 62px;
+      height: 56px;
       border-radius: 999px;
-      border: 2px solid var(--mobile-outline);
+      border: 1.5px solid var(--mobile-outline);
       background: transparent;
       color: var(--mobile-outline);
-      font-size: 18px;
-      font-weight: 500;
-      margin-bottom: 34px;
+      font-size: 17px;
+      font-weight: 600;
+      margin-bottom: 28px;
       cursor: pointer;
-      flex: 0 0 auto;
     }
 
-    .mobile-Hangout {
+    .mobile-meta {
       display: flex;
-      justify-content: center;
       align-items: center;
-      width: 100%;
-      margin: 0px auto 24px;
-      background: transparent;
-      text-align: center;
-      flex: 0 0 auto;
+      justify-content: center;
+      gap: 8px;
+      color: var(--text);
+      font-size: 16px;
+      font-weight: 500;
     }
 
-    .mobile-hangout-img {
-      display: block;
-      width: 118px;
-      max-width: 100%;
-      height: auto;
-      margin: 0 auto;
-      margin-left: auto;
-      margin-right: auto;
-      object-fit: contain;
-    }
-
-    .mobile-bottom-bar {
-      display: none;
+    .mobile-meta-icon {
+      font-size: 22px;
+      line-height: 1;
     }
   }
 
-  @media (max-width: 520px) {
-    .mobile-top-lang {
-      padding-top: 12px;
-      font-size: 11px;
-    }
-
-    .mobile-screen {
-      padding: 12px 16px 10px;
-    }
-
+  /* Compact for very small screens */
+  @media (max-width: 980px) and (max-height: 700px) {
     .mobile-logo-img {
-      width: 56px;
-      height: 56px;
-      margin: 8px 0 14px;
-      border-radius: 18px;
-    }
-
-    .mobile-field {
-      margin-bottom: 10px;
-    }
-
-    .mobile-field input {
-      height: 50px;
-      font-size: 15px;
-      padding: 0 14px;
-      border-radius: 16px;
-    }
-
-    .mobile-btn {
-      height: 50px;
-      font-size: 15px;
-    }
-
-    .mobile-forgot {
-      font-size: 14px;
-      margin: 12px 0 20px;
-    }
-
-    .mobile-create {
-      height: 50px;
-      font-size: 15px;
-    }
-
-    .mobile-Hangout {
-      margin: 14px auto 6px;
-    }
-
-    .mobile-hangout-img {
       width: 80px;
-    }
-  }
-
-  @media (max-height: 760px) and (max-width: 980px) {
-    .mobile-top-lang {
-      padding-top: 10px;
-    }
-
-    .mobile-logo-img {
-      width: 50px;
-      height: 50px;
-      margin: 6px 0 10px;
-    }
-
-    .mobile-field {
-      margin-bottom: 8px;
+      height: 80px;
+      margin: 20px 0 30px;
+      border-radius: 22px;
     }
 
     .mobile-field input,
     .mobile-btn,
     .mobile-create {
-      height: 46px;
-      font-size: 14px;
+      height: 50px;
+      font-size: 15px;
     }
 
     .mobile-forgot {
-      font-size: 13px;
-      margin: 10px 0 16px;
+      font-size: 14px;
+      margin-top: 16px;
     }
 
-    .mobile-hangout-img {
-      width: 72px;
+    .mobile-bottom {
+      padding-bottom: 20px;
     }
   }
 </style>
@@ -709,7 +648,7 @@
             <img
               class="hero-logo-img"
               src="https://tse4.mm.bing.net/th/id/OIP.O4Y8o8o3R9L_IuuKi8uDAgHaHa?pid=Api&P=0&h=180"
-              alt="Instagram logo"
+              alt="Gowthamsite logo"
             />
 
             <h1 class="hero-title">
@@ -743,7 +682,7 @@
 
       <section class="auth-side">
         <div class="auth-box">
-          <div class="auth-title">Log into Instagram</div>
+          <div class="auth-title">Log into Gowthamsite</div>
 
           <form method="post" action="">
             <div class="field">
@@ -764,10 +703,10 @@
 
           <button class="btn btn-outline blue" type="button">Create new account</button>
 
-          <div class="Meta-block">
-            <svg class="Meta-svg" viewBox="0 0 120 40" xmlns="http://www.w3.org/2000/svg" aria-label="Meta logo">
+          <div class="Hangout-block">
+            <svg class="Hangout-svg" viewBox="0 0 120 40" xmlns="http://www.w3.org/2000/svg" aria-label="Hangout logo">
               <path d="M18 28c0-8 4-16 8-16 5 0 9 16 14 16 4 0 6-5 6-10 0-6-3-10-8-10-7 0-11 7-14 13C21 15 17 8 10 8 5 8 2 12 2 18c0 5 2 10 6 10 5 0 9-16 14-16 4 0 8 8 8 16" fill="none" stroke="currentColor" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
-              <text x="58" y="28" fill="currentColor" font-size="22" font-family="Inter, Arial, sans-serif">Meta</text>
+              <text x="58" y="28" fill="currentColor" font-size="22" font-family="Inter, Arial, sans-serif">Hangout</text>
             </svg>
             <div class="uk-note">
               In the India, you can create a detailed report for something that breaks the law.
@@ -780,7 +719,7 @@
 
     <footer class="footer">
       <div class="footer-links">
-        <a href="#">Meta</a>
+        <a href="#">Hangout</a>
         <a href="#">About</a>
         <a href="#">Blog</a>
         <a href="#">Jobs</a>
@@ -790,28 +729,31 @@
         <a href="#">Cookie Settings</a>
         <a href="#">Terms</a>
         <a href="#">Locations</a>
-        <a href="#">Instagram Lite</a>
-        <a href="#">Meta AI</a>
+        <a href="#">Gowthamsite Lite</a>
+        <a href="#">Hangout AI</a>
         <a href="#">Threads</a>
         <a href="#">Contact Uploading &amp; Non-Users</a>
-        <a href="#">Meta Verified</a>
+        <a href="#">Hangout Verified</a>
       </div>
       <div class="footer-bottom-wrap">
         <select class="footer-select" aria-label="Language">
           <option>English</option>
         </select>
-        <div>© 2026 Instagram from Meta</div>
+        <div>© 2026 Gowthamsite from Hangout</div>
       </div>
     </footer>
 
+    <!-- MOBILE LAYOUT — restructured to match target screenshot -->
     <div class="mobile-wrap">
-      <div class="mobile-top-lang">English (US)</div>
 
-      <div class="mobile-screen">
+      <!-- Top: lang label + logo + form + forgot -->
+      <div class="mobile-top">
+        <div class="mobile-top-lang">English (US)</div>
+
         <img
           class="mobile-logo-img"
           src="https://tse2.mm.bing.net/th/id/OIP.FeWotnRGnssUzaP_Q6mLKwHaHa?pid=Api&P=0&h=180"
-          alt="Instagram logo"
+          alt="Gowthamsite logo"
         />
 
         <form class="mobile-form" method="post" action="">
@@ -825,20 +767,18 @@
         </form>
 
         <a class="mobile-forgot" href="#">Forgot password?</a>
+      </div>
 
+      <!-- Bottom: create account + Meta branding -->
+      <div class="mobile-bottom">
         <button class="mobile-create" type="button">Create new account</button>
 
-<div class="mobile-Hangout">
-  <img
-    class="mobile-hangout-img"
-    src="https://tse2.mm.bing.net/th/id/OIP.LckVZzlV9jO6O53Ewhy9CAHaGB?pid=Api&P=0&h=180"
-    alt="Hangout logo"
-    width="120"
-    height="96"
-    loading="lazy"
-  >
-</div>        
+        <div class="mobile-meta">
+          <span class="mobile-meta-icon">∞</span>
+          <span>Meta</span>
+        </div>
       </div>
+
     </div>
   </div>
 </body>
